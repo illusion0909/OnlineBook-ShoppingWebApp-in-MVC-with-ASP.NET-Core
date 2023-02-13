@@ -1,0 +1,47 @@
+﻿@model IEnumerable<OnlineBookShoppingApp.Models.OrderHeader>
+<h2 class="text-primary text-center">Order Status</h2>
+@*@Html.ActionLink("Create New Employee","Upsert","Employee",new { @class = "btn btn-info" })*@
+<table class="table table-striped table-bordered table-active table-dark bg-dark text-white">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>OrderDate</th>
+            <th>OrderStatus</th>
+            <th>PaymentStatus</th>
+            <th>PaymentDate</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            using (Html.BeginForm("Details", "OrderStatus", new { id = item.Id }))
+            {
+                <tr>
+                    <th>@item.Name</th>
+                    <th>@item.OrderDate</th>
+                    <th>@item.OrderStatus</th>
+                    <th>@item.PaymentStatus</th>
+                    <th>@item.PaymentDate</th>
+
+
+                    <td>
+
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-danger" })
+
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+
+</table>
+
+
+
+
+
+
+
+
+

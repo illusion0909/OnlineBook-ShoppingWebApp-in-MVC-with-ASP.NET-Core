@@ -1,0 +1,54 @@
+﻿@model IEnumerable<OnlineBookShoppingApp.Models.Product>
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+{
+    <table>
+        <tr>
+
+            <td>
+                <span><b>Search :</b></span>
+                @Html.RadioButton("SearchString", "Title",true)
+                <text>Book Name</text>
+                @Html.RadioButton("SearchString", "isbn",true)
+                <text>ISBN</text>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.TextBox("searchValue",null,new{Class="form-control",placeholder="Enter book Name or isbn,"})
+            </td>
+            <td>
+                <input type="submit" value="Search" class="btn btn-success" />
+
+            </td>
+        </tr>
+    </table>
+}
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-lg-3 col-md-6">
+            <div class="row p-2">
+                <div class="col-12  p-1" style="border:1px solid #008cba; border-radius: 5px;">
+                    <div class="card" style="border:0px;">
+                        <img src="@product.ImageUrl" class="card-img-top rounded" />
+                        <div class="pl-1">
+                            <p class="card-title h5"><b style="">@product.Title</b></p>
+                            <p class="card-title text-primary">by <b>@product.Author</b></p>
+                        </div>
+                        <div style="padding-left:5px;">
+                            <p>List Price: <strike><b class="">₹@product.ListPrice.ToString("0.00")</b></strike></p>
+                        </div>
+                        <div style="padding-left:5px;">
+                            <p style="color:maroon">As low as: <b class="">₹@product.price100.ToString("0.00")</b></p>
+                        </div>
+                    </div>
+                    <div>
+                        <a asp-action="Details" class="btn btn-dark form-control" asp-route-id="@product.Id">Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
